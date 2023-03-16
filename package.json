@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/KOROMO-Learning-Together/Pokemon-Gatya#readme",
   "devDependencies": {
-    "jest": "^29.5.0"
+    "jest": "^29.5.0",
+    "jsdom": "^21.1.1"
   }
 }
