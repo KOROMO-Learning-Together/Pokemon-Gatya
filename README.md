@@ -1,4 +1,3 @@
 # Pokemon-Gatya
 
-npm install した後に　　
-npm run test でテストができます。
+`npm install`後、`npm run test`でテストができます。
