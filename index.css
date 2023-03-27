@@ -1,0 +1,75 @@
+#mainContainer {
+    position: relative;
+    width: 542px;
+    height: auto;
+}
+
+#initialScreen {
+    width: 542px;
+    height: auto;
+}
+
+#gachaButton {
+    position: absolute;
+    border: none;
+    outline: none;
+    background: transparent;
+    padding: 0;
+    left: 0;
+    top: 114px;
+  }
+
+  #gachaButtonImg {
+    border: none;
+    outline: none;
+    background: transparent;
+    width: 74px;
+  }
+
+#pokemonWindow {
+    display: flex;
+    border: solid 3px;
+    border-color:gray;
+    border-radius: 10px;
+    width: 542px;
+    height: auto;
+}
+
+#gacha {
+    width: 542px;
+    height: auto;
+}
+
+#pokemon {
+    width: 271px;
+    margin: 10px 0;
+    border-right: solid 3px;
+    border-color:gray;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+}
+
+#pokemonImg {
+    width: 271px;
+    height: auto;
+}
+
+#status {
+    width: 271px;
+    margin: 10px 0 10px 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+}
+
+#continueButton {
+    width: 200px;
+    height: 24px;
+    margin: 10px 0 10px 10px;
+    display: flex;
+}
+
