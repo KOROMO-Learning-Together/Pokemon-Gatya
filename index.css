@@ -16,15 +16,17 @@
     background: transparent;
     padding: 0;
     left: 0;
-    top: 114px;
+    top: 111px;
   }
 
   #gachaButtonImg {
     border: none;
     outline: none;
     background: transparent;
-    width: 74px;
+    width: 77px;
   }
+
+
 
 #pokemonWindow {
     display: flex;
@@ -40,7 +42,7 @@
     height: auto;
 }
 
-#pokemon {
+#pokemonNameContainer {
     width: 271px;
     margin: 10px 0;
     border-right: solid 3px;

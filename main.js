@@ -5,6 +5,7 @@ function main (){
     //Gachaのインスタンスを作成
     const gacha = new PokemonGacha('easy')
     gacha.start()
+    
 }
 
 class PokemonGacha {
@@ -13,8 +14,10 @@ class PokemonGacha {
     }
 
     pokemon = {}
+
+    species = {}
     
-    monsterBall = 'normal'
+    monsterBall = 'normalBall'
 
     async start(){
         // 表示している要素を消す
@@ -59,7 +62,7 @@ class PokemonGacha {
         gacha.remove()
 
         // ポケモンの画像を取得
-        const pokemon = await this.getPokemon()
+        const pokemonImg = await this.makePokemonImg()
 
         // ポケモンのステータス表示を作成
         const pokemonStatus = await this.makePkemonStatus()
@@ -67,29 +70,62 @@ class PokemonGacha {
         // ポケモンを表示
         const pokemonWindow = document.createElement('div');
         pokemonWindow.id = 'pokemonWindow'
-        pokemonWindow.appendChild(pokemon);
+        pokemonWindow.appendChild(pokemonImg);
         pokemonWindow.appendChild(pokemonStatus);
         document.body.appendChild(pokemonWindow)
     }
 
-    async getPokemon(){
-        const res = await fetch(this.pokemon.sprites.other.home.front_default)
+    async makePokemonImg(){
+        // ポケモンの画像を取得する
+        let res = await fetch(this.pokemon.sprites.other.home.front_default)
         const blob = await res.blob()
         const pokemonImg = document.createElement('img');
         pokemonImg.id = 'pokemonImg'
         pokemonImg.src = URL.createObjectURL(blob);
-        const pokemonName = document.createElement('div');
+
+        // ポケモンのidを取得する
+        const pokemonId = document.createElement('p');
+        pokemonId.id = 'pokemonId'
+        pokemonId.innerHTML = `No.${this.pokemon.id.toString().padStart(4,'0')}`
+        
+        // ポケモンの名前を取得する
+        const pokemonName = document.createElement('p');
         pokemonName.id = 'pokemonName'
+        res = await fetch(this.pokemon.species.url)
+        this.species = await res.json()
+        pokemonName.innerHTML = this.species.names.filter(element => element.language.name === 'ja')[0].name
 
-        const response = await fetch(this.pokemon.species.url)
-        const species = await response.json()
+        // ポケモンの性別を取得する
+        const pokemonGender = document.createElement('div');
+        pokemonGender.id = 'pokemonGender'
+        if(this.species.gender_rate === 8){
+            const pokemonFemale = document.createElement('img');
+            pokemonFemale.src = 'icon_female.svg'
+            pokemonGender.appendChild(pokemonFemale)
+        } else if(this.species.gender_rate === 0){
+            const pokemonMale = document.createElement('img');
+            pokemonMale.src = 'icon_male.svg'
+            pokemonGender.appendChild(pokemonMale)
+        } else if(this.species.gender_rate === -1){
+            pokemonGender.innerHTML = '不明'
+        } else {
+            const pokemonFemale = document.createElement('img');
+            pokemonFemale.src = 'icon_female.svg'
+            const pokemonMale = document.createElement('img');
+            pokemonMale.src = 'icon_male.svg'
+            pokemonGender.appendChild(pokemonFemale)
+            pokemonGender.appendChild(pokemonMale)
+        }
 
-        pokemonName.innerHTML = species.names.filter(element => element.language.name === 'ja')[0].name
-        const pokemon = document.createElement('div');
-        pokemon.id = 'pokemon'
-        pokemon.appendChild(pokemonName);
-        pokemon.appendChild(pokemonImg);
-        return pokemon
+        pokemonName.innerHTML = this.species.names.filter(element => element.language.name === 'ja')[0].name
+
+        const pokemonNameContainer = document.createElement('div');
+        pokemonNameContainer.id = 'pokemonNameContainer'
+        pokemonNameContainer.appendChild(pokemonId);
+        pokemonNameContainer.appendChild(pokemonName);
+        pokemonNameContainer.appendChild(pokemonGender)
+        pokemonNameContainer.appendChild(pokemonImg);
+        return pokemonNameContainer
     }
 
     async makePkemonStatus(){
@@ -104,6 +140,10 @@ class PokemonGacha {
         weight.id = 'weight'
         weight.innerHTML = `体重：${this.pokemon.weight/10} kg`
 
+        const genera = document.createElement('p');
+        genera.id = 'genera'
+        genera.innerHTML = `分類：${this.species.genera.filter((element)=>element.language.name === 'ja')[0].genus}`
+
         const types = document.createElement('p');
         types.id = 'types';
 
@@ -117,14 +157,35 @@ class PokemonGacha {
             types.innerHTML = `タイプ：${pokemonTypes}`
         });
 
+        const abilities = document.createElement('p');
+        abilities.id = 'abilities';
+
+        let pokemonAbilities = '';
+
+        this.pokemon.abilities.forEach(async element => {
+            const res = await fetch(element.ability.url)
+            const ability = await res.json();
+            pokemonAbilities += ability.names.filter(element => element.language.name === 'ja')[0].name
+            pokemonAbilities += '/'
+            abilities.innerHTML = `特性：${pokemonAbilities}`
+        });
+
+
+        const flavorText =  document.createElement('p')
+        flavorText.id = 'flavorText'
+        flavorText.innerHTML = this.species.flavor_text_entries.filter(element => element.language.name === 'ja')[0].flavor_text
+
         const continueButton = document.createElement('button');
         continueButton.id = 'continueButton'
         continueButton.onclick = this.continue
         continueButton.innerHTML = 'もう一度ゲットする！！';
 
+        status.appendChild(genera)
         status.appendChild(types)
         status.appendChild(height)
         status.appendChild(weight)
+        status.appendChild(abilities)
+        status.appendChild(flavorText)
         status.appendChild(continueButton)
 
         return status
@@ -144,11 +205,11 @@ class PokemonGacha {
         // 設定によって出現するモンスターボールの確率を変更
         if(this.mode === 'easy'){
             const hogehoge = Math.floor(Math.random()*100)
-            if(hogehoge>95){
+            if(hogehoge>90){
                 this.monsterBall = 'masterBall'
-            } else if (hogehoge>85){
+            } else if (hogehoge>70){
                 this.monsterBall = 'hyperBall'
-            } else if (hogehoge>65){
+            } else if (hogehoge>40){
                 this.monsterBall = 'superBall'
             } else {
                 this.monsterBall = 'normalBall'
@@ -174,6 +235,8 @@ class PokemonGacha {
         const gachaButtonImg = document.createElement('img');
         gachaButtonImg.id = 'gachaButtonImg'
         gachaButtonImg.src = 'gachaButton.png'
+        gachaButton.onmouseenter = ()=>{gachaButtonImg.src = 'gachaButtonHover.png'}
+        gachaButton.onmouseout = ()=>{gachaButtonImg.src = 'gachaButton.png'}
         gachaButtonImg.alt = 'button'
         
         const initialScreen = document.createElement('img');
