@@ -50,7 +50,9 @@ class PokemonGacha {
         video.autoplay = true;
         video.muted = true;
         video.playsinline = true;
-        document.body.appendChild(video);
+
+        const pageElement = document.getElementById("page")
+        pageElement.appendChild(video);
 
         // 再生終了時のアクション => ゲットしたポケモンの画像とステータスを表示
 	    video.addEventListener("ended", async () => {await this.showPokemon()}, false);
@@ -92,9 +94,9 @@ class PokemonGacha {
 
 
 
+        const pageElement = document.getElementById("page")
+        pageElement.appendChild(pokemonWindow);
 
-
-        document.body.appendChild(pokemonWindow)
     }
 
     async makePokemonImg(){
@@ -266,6 +268,8 @@ class PokemonGacha {
         mainContainer.appendChild(initialScreen)
         gachaButton.appendChild(gachaButtonImg)
         mainContainer.appendChild(gachaButton)
-        document.body.appendChild(mainContainer);
+
+        const pageElement = document.getElementById("page")
+        pageElement.appendChild(mainContainer);
     }
 }

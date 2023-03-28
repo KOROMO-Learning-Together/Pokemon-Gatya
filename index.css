@@ -1,3 +1,16 @@
+body {
+    background-color: darkgrey;
+    margin: 0;
+}
+
+#page {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 #mainContainer {
     position: relative;
     width: 542px;
@@ -17,15 +30,14 @@
     padding: 0;
     left: 0;
     top: 111px;
-  }
+}
 
-  #gachaButtonImg {
+#gachaButtonImg {
     border: none;
     outline: none;
     background: transparent;
     width: 77px;
-  }
-
+}
 
 
 #pokemonWindow {
@@ -58,7 +70,7 @@
 }
 
 #pokemonImg {
-    width: calc(( 490 / 1280 ) *100vw );
+    width: calc((490 / 1280) * 100vw);
     height: auto;
     max-width: 490px;
     text-align: center;
@@ -67,7 +79,7 @@
 
 #pokemonNameContainer {
     padding: 30px 30px 45px 30px;
-    width: calc(( 500 / 1280 ) *100vw );
+    width: calc((500 / 1280) * 100vw);
     max-width: 500px;
     border-radius: 8px;
     box-shadow: 8px 8px 0 #d9d9d9;
@@ -75,7 +87,6 @@
     margin: 80px 0 80px 0;
     background-color: #fff;
 }
-
 
 
 #status {
