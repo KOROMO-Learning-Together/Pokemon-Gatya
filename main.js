@@ -67,11 +67,33 @@ class PokemonGacha {
         // ポケモンのステータス表示を作成
         const pokemonStatus = await this.makePkemonStatus()
 
-        // ポケモンを表示
+        // 画面を作成
         const pokemonWindow = document.createElement('div');
         pokemonWindow.id = 'pokemonWindow'
         pokemonWindow.appendChild(pokemonImg);
         pokemonWindow.appendChild(pokemonStatus);
+
+        // コンティニューボタンを作成
+        const continueButton = document.createElement('button');
+        continueButton.id = 'continueButton'
+        continueButton.onclick = this.continue
+        const buttonImg = document.createElement('img');
+        buttonImg.id = 'continueButtonImg'
+        buttonImg.src = 'continueButton.svg'
+        buttonImg.onmouseenter = ()=>{buttonImg.src = 'continueButtonHover.svg'}
+        buttonImg.onmouseout = ()=>{buttonImg.src = 'continueButton.svg'}
+        continueButton.appendChild(buttonImg)
+
+        const footer = document.createElement('div')
+        footer.id = 'footer'
+        footer.appendChild(continueButton)
+
+        pokemonWindow.appendChild(footer);
+
+
+
+
+
         document.body.appendChild(pokemonWindow)
     }
 
@@ -117,15 +139,16 @@ class PokemonGacha {
             pokemonGender.appendChild(pokemonMale)
         }
 
-        pokemonName.innerHTML = this.species.names.filter(element => element.language.name === 'ja')[0].name
-
+        const header = document.createElement('div');
+        header.id = 'header';
         const pokemonNameContainer = document.createElement('div');
         pokemonNameContainer.id = 'pokemonNameContainer'
         pokemonNameContainer.appendChild(pokemonId);
         pokemonNameContainer.appendChild(pokemonName);
         pokemonNameContainer.appendChild(pokemonGender)
-        pokemonNameContainer.appendChild(pokemonImg);
-        return pokemonNameContainer
+        header.appendChild(pokemonImg);
+        header.appendChild(pokemonNameContainer)
+        return header
     }
 
     async makePkemonStatus(){
@@ -175,18 +198,14 @@ class PokemonGacha {
         flavorText.id = 'flavorText'
         flavorText.innerHTML = this.species.flavor_text_entries.filter(element => element.language.name === 'ja')[0].flavor_text
 
-        const continueButton = document.createElement('button');
-        continueButton.id = 'continueButton'
-        continueButton.onclick = this.continue
-        continueButton.innerHTML = 'もう一度ゲットする！！';
-
+        
         status.appendChild(genera)
         status.appendChild(types)
         status.appendChild(height)
         status.appendChild(weight)
         status.appendChild(abilities)
         status.appendChild(flavorText)
-        status.appendChild(continueButton)
+
 
         return status
 
