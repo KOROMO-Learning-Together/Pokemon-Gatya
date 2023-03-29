@@ -95,17 +95,19 @@ body {
 
 
 #statusWindow {
-    width: 600px;
+    width: 800px;
     display: flex;
     flex-direction: column;
+    align-items: center;
 }
 #status {
-    width: 700px;
+    width: 800px;
     display: flex;
     flex-direction: row;
+    justify-content: center
 }
 #statusL {
-    width: 400px;
+    width: 250px;
     display: flex;
     flex-direction: column;
     border-radius: 8px;
@@ -115,7 +117,7 @@ body {
     padding: 10px;
 }
 #statusR {
-    width: 400px;
+    width: 430px;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
@@ -126,7 +128,7 @@ body {
     padding: 10px;
 }
 #description {
-    width: 660px;
+    width: 726px;
     border-radius: 8px;
     border-width: 4px;
     border: solid #e6e6e6;
