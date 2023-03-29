@@ -154,8 +154,8 @@ class PokemonGacha {
     }
 
     async makePkemonStatus(){
-        const status = document.createElement('div');
-        status.id =  'status'
+        const statusL = document.createElement('div');
+        statusL.id =  'statusL'
 
         const height = document.createElement('p');
         height.id = 'height'
@@ -196,20 +196,189 @@ class PokemonGacha {
         });
 
 
+        statusL.appendChild(genera)
+        statusL.appendChild(types)
+        statusL.appendChild(height)
+        statusL.appendChild(weight)
+        statusL.appendChild(abilities)
+
+        const statusR = document.createElement('div');
+        statusR.id =  'statusR'
+
+        const hpColumn = document.createElement('div');
+        hpColumn.id =  'hpColumn'
+        const hp = document.createElement('div');
+        hp.id =  'hp'
+        hp.innerHTML = 'HP  '
+        const hpGage = document.createElement('div');
+        hpGage.id =  'hpGage'
+        let hpCount = Math.floor(this.pokemon.stats.filter(element => element.stat.name === 'hp')[0].base_stat/10)
+        if(hpCount>15){hpCount = 15}
+        for (let i = 0; i < hpCount; i++){
+            const yellowGage = document.createElement('div');
+            yellowGage.className = 'yellowGage'
+            hpGage.appendChild(yellowGage)
+        }
+        for (let i = 0; i < 15-hpCount; i++){
+            const whiteGage = document.createElement('div');
+            whiteGage.className = 'whiteGage'
+            hpGage.appendChild(whiteGage)
+        }
+
+        hpColumn.appendChild(hp)
+        hpColumn.appendChild(hpGage)
+
+        const attackColumn = document.createElement('div');
+        attackColumn.id =  'attackColumn'
+        const attack = document.createElement('div');
+        attack.id =  'attack'
+        attack.innerHTML = 'こうげき'
+        const attackGage = document.createElement('div');
+        attackGage.id =  'attackGage'
+        let attackCount = Math.floor(this.pokemon.stats.filter(element => element.stat.name === 'attack')[0].base_stat/10)
+        if(attackCount>15){hpCount = 15}
+        for (let i = 0; i < attackCount; i++){
+            const yellowGage = document.createElement('div');
+            yellowGage.className = 'yellowGage'
+            attackGage.appendChild(yellowGage)
+        }
+        for (let i = 0; i < 15-attackCount; i++){
+            const whiteGage = document.createElement('div');
+            whiteGage.className = 'whiteGage'
+            attackGage.appendChild(whiteGage)
+        }
+
+        attackColumn.appendChild(attack)
+        attackColumn.appendChild(attackGage)
+
+        const defenseColumn = document.createElement('div');
+        defenseColumn.id =  'defenseColumn'
+        const defense = document.createElement('div');
+        defense.id =  'defense'
+        defense.innerHTML = 'ぼうぎょ'
+        const defenseGage = document.createElement('div');
+        defenseGage.id =  'defenseGage'
+        let defenseCount = Math.floor(this.pokemon.stats.filter(element => element.stat.name === 'defense')[0].base_stat/10)
+        if(defenseCount>15){defenseCount = 15}
+        for (let i = 0; i < defenseCount; i++){
+            const yellowGage = document.createElement('div');
+            yellowGage.className = 'yellowGage'
+            defenseGage.appendChild(yellowGage)
+        }
+        for (let i = 0; i < 15-defenseCount; i++){
+            const whiteGage = document.createElement('div');
+            whiteGage.className = 'whiteGage'
+            defenseGage.appendChild(whiteGage)
+        }
+
+        defenseColumn.appendChild(defense)
+        defenseColumn.appendChild(defenseGage)
+
+
+
+        const spAttackColumn = document.createElement('div');
+        spAttackColumn.id =  'spAttackColumn'
+        const spAttack = document.createElement('div');
+        spAttack.id =  'spAttack'
+        spAttack.innerHTML = 'とくこう'
+        const spAttackGage = document.createElement('div');
+        spAttackGage.id =  'spAttackGage'
+        let spAttackCount = Math.floor(this.pokemon.stats.filter(element => element.stat.name === 'special-attack')[0].base_stat/10)
+        if(spAttackCount>15){spAttackCount = 15}
+        for (let i = 0; i < spAttackCount; i++){
+            const yellowGage = document.createElement('div');
+            yellowGage.className = 'yellowGage'
+            spAttackGage.appendChild(yellowGage)
+        }
+        for (let i = 0; i < 15-spAttackCount; i++){
+            const whiteGage = document.createElement('div');
+            whiteGage.className = 'whiteGage'
+            spAttackGage.appendChild(whiteGage)
+        }
+
+        spAttackColumn.appendChild(spAttack)
+        spAttackColumn.appendChild(spAttackGage)
+
+        const spDefenseColumn = document.createElement('div');
+        spDefenseColumn.id =  'spDefenseColumn'
+        const spDefense = document.createElement('div');
+        spDefense.id =  'spDefense'
+        spDefense.innerHTML = 'とくぼう'
+        const spDefenseGage = document.createElement('div');
+        spDefenseGage.id =  'spDefenseGage'
+        let spDefenseCount = Math.floor(this.pokemon.stats.filter(element => element.stat.name === 'special-defense')[0].base_stat/10)
+        if(spDefenseCount>15){spDefenseCount = 15}
+        for (let i = 0; i < defenseCount; i++){
+            const yellowGage = document.createElement('div');
+            yellowGage.className = 'yellowGage'
+            spDefenseGage.appendChild(yellowGage)
+        }
+        for (let i = 0; i < 15-defenseCount; i++){
+            const whiteGage = document.createElement('div');
+            whiteGage.className = 'whiteGage'
+            spDefenseGage.appendChild(whiteGage)
+        }
+
+        spDefenseColumn.appendChild(spDefense)
+        spDefenseColumn.appendChild(spDefenseGage)
+
+        const speedColumn = document.createElement('div');
+        speedColumn.id =  'defenseColumn'
+        const speed = document.createElement('div');
+        speed.id =  'spDefense'
+        speed.innerHTML = 'すばやさ'
+        const speedGage = document.createElement('div');
+        speedGage.id =  'speedGage'
+        let speedCount = Math.floor(this.pokemon.stats.filter(element => element.stat.name === 'speed')[0].base_stat/10)
+        if(speedCount>15){speedCount = 15}
+        for (let i = 0; i < speedCount; i++){
+            const yellowGage = document.createElement('div');
+            yellowGage.className = 'yellowGage'
+            speedGage.appendChild(yellowGage)
+        }
+        for (let i = 0; i < 15-speedCount; i++){
+            const whiteGage = document.createElement('div');
+            whiteGage.className = 'whiteGage'
+            speedGage.appendChild(whiteGage)
+        }
+
+        speedColumn.appendChild(speed)
+        speedColumn.appendChild(speedGage)
+
+
+        statusR.appendChild(hpColumn)
+        statusR.appendChild(attackColumn)
+        statusR.appendChild(defenseColumn)
+        statusR.appendChild(spAttackColumn)
+        statusR.appendChild(spDefenseColumn)
+        statusR.appendChild(speedColumn)
+
+        const status = document.createElement('div');
+        status.id =  'status'
+
+        status.appendChild(statusL)
+        status.appendChild(statusR)
+
+
         const flavorText =  document.createElement('p')
         flavorText.id = 'flavorText'
         flavorText.innerHTML = this.species.flavor_text_entries.filter(element => element.language.name === 'ja')[0].flavor_text
 
         
-        status.appendChild(genera)
-        status.appendChild(types)
-        status.appendChild(height)
-        status.appendChild(weight)
-        status.appendChild(abilities)
-        status.appendChild(flavorText)
+
+        const description = document.createElement('div');
+        description.id =  'description'
+
+        description.appendChild(flavorText)
+
+        const statusWindow = document.createElement('div');
+        statusWindow.id =  'statusWindow'
+
+        statusWindow.appendChild(status)
+        statusWindow.appendChild(description)
 
 
-        return status
+        return statusWindow
 
     }
 

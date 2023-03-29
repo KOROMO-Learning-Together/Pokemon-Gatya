@@ -1,5 +1,5 @@
 body {
-    background-color: darkgrey;
+    background-color: white;
     margin: 0;
 }
 
@@ -30,9 +30,9 @@ body {
     outline: none;
     background: transparent;
     padding: 0;
-    left: 0.1%;
-    top: 36.5%;
-    width: 14%;
+    left: 0%;
+    top: 36.3%;
+    width: 14.2%;
 }
 
 #gachaButtonImg {
@@ -49,6 +49,7 @@ body {
     height: 100%;
     flex-direction: column;
     align-items: center;
+    justify-content: space-between;
 }
 
 #gacha {
@@ -58,44 +59,171 @@ body {
 
 #header {
     display: flex;
+    height: 250px;
     width: 100%;
     height: 40%;
     background-image: url(Monsterball_BG2.png);
-    justify-content: center
-}
-
-#status {
-    width: 30%;
-    height: 40%;
-    display: flex;
-    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 #footer {
     display: flex;
-    height: 20%;
+    height: 100px;
     width: 100%;
     background-image: url(Monsterball_BG2.png);
     justify-content: center
 }
 
 #pokemonImg {
-    width: calc((490 / 1280) * 100vw);
-    height: auto;
-    max-width: 490px;
+    width: auto;
+    height: 250px;
+
     text-align: center;
     flex: 0 0 auto;
 }
 
 #pokemonNameContainer {
-    padding: 30px 30px 45px 30px;
-    width: calc((500 / 1280) * 100vw);
-    max-width: 500px;
+    padding: 10px 30px 10px 30px;
+    width: 250px;
+    height: 140px;
     border-radius: 8px;
     box-shadow: 8px 8px 0 #d9d9d9;
     text-align: left;
-    margin: 80px 0 80px 0;
     background-color: #fff;
+}
+
+
+#statusWindow {
+    width: 600px;
+    display: flex;
+    flex-direction: column;
+}
+#status {
+    width: 700px;
+    display: flex;
+    flex-direction: row;
+}
+#statusL {
+    width: 400px;
+    display: flex;
+    flex-direction: column;
+    border-radius: 8px;
+    border-width: 4px;
+    border: solid #e6e6e6;
+    margin: 10px;
+    padding: 10px;
+}
+#statusR {
+    width: 400px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    border-radius: 8px;
+    border-width: 4px;
+    border: solid #e6e6e6;
+    margin: 10px;
+    padding: 10px;
+}
+#description {
+    width: 660px;
+    border-radius: 8px;
+    border-width: 4px;
+    border: solid #e6e6e6;
+    margin: 10px;
+    padding: 10px;
+}
+#hp {
+margin-right: 10px;
+}
+#hpColumn {
+    display: flex;
+    width: 400px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-end;
+}
+#hpGage {
+    display: flex;
+    flex-direction: row;
+}
+
+#attack {
+    margin-right: 10px;
+    }
+#attackColumn {
+    display: flex;
+    width: 400px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-end;
+}
+#attackGage {
+    display: flex;
+    flex-direction: row;
+}
+#defense {
+    margin-right: 10px;
+    }
+#defenseColumn {
+    display: flex;
+    width: 400px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-end;
+}
+#defenseGage {
+    display: flex;
+    flex-direction: row;
+}
+
+#spAttack {
+    margin-right: 10px;
+    }
+#spAttackColumn {
+    display: flex;
+    width: 400px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-end;
+}
+#spAttackGage {
+    display: flex;
+    flex-direction: row;
+}
+#spDefense {
+    margin-right: 10px;
+    }
+#spDefenseColumn {
+    display: flex;
+    width: 400px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-end;
+}
+#spDefenseGage {
+    display: flex;
+    flex-direction: row;
+}
+#speed {
+    margin-right: 10px;
+    }
+#speedColumn {
+    display: flex;
+    width: 400px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-end;
+}
+#speedGage {
+    display: flex;
+    flex-direction: row;
 }
 
 #continueButton {
@@ -105,7 +233,22 @@ body {
 }
 
 #continueButtonImg {
-    width: 200px;
+    width: 250px;
     height: auto;
 }
 
+.yellowGage{
+    width:15px;
+    height:35px;
+    border-radius:8px;
+    margin-right: 5px;
+    background-color: #fc0;
+}
+
+.whiteGage{
+    width:15px;
+    height:35px;
+    border-radius:8px;
+    margin-right: 5px;
+    background-color:darkgray
+}
