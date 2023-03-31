@@ -1,11 +1,10 @@
 'use strict';
 
 // main関数　ボタンが押されたら読み込まれる
-function main (){
+export function main (){
     //Gachaのインスタンスを作成
     const gacha = new PokemonGacha('easy')
     gacha.start()
-    
 }
 
 class PokemonGacha {
@@ -14,9 +13,7 @@ class PokemonGacha {
     }
 
     pokemon = {}
-
     species = {}
-    
     monsterBall = 'normalBall'
 
     async start(){
