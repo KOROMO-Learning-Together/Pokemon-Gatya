@@ -2,8 +2,6 @@ const fs = require("fs");
 const { JSDOM } = require("jsdom");
 const { PokemonGacha } = require('./main.js') ;
 
-new PokemonGacha('easy')
-
 describe("ポケモンガチャのtest", () => {
   describe("index.html", () => {
     let document;
