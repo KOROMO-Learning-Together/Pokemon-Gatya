@@ -1,7 +1,7 @@
 'use strict';
 
 // main関数　ボタンが押されたら読み込まれる
-export function main (){
+function main (){
     //Gachaのインスタンスを作成
     const gacha = new PokemonGacha('easy')
     gacha.start()
@@ -439,3 +439,5 @@ class PokemonGacha {
         pageElement.appendChild(mainContainer);
     }
 }
+
+module.exports = PokemonGacha;

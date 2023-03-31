@@ -1,5 +1,8 @@
 const fs = require("fs");
 const { JSDOM } = require("jsdom");
+const { PokemonGacha } = require('./main.js') ;
+
+new PokemonGacha('easy')
 
 describe("ポケモンガチャのtest", () => {
   describe("index.html", () => {
@@ -79,19 +82,25 @@ describe("ポケモンガチャのtest", () => {
       });
     });
   });
-  // describe("main.js", () => {
-  //   beforeEach(() => {
+  describe("main.js", () => {
+    // beforeEach(() => {
       
-  //   });
-  //   describe("main()", () => {
-  //     it("", () => {
+    // });
+    // describe("main()", () => {
+    //   it("", () => {
         
-  //     });
-  //   });
-  //   describe("class PokemonGacha", () => {
-  //     it("", () => {
-        
-  //     });
-  //   });
-  // });
+    //   });
+    // });
+    describe("class PokemonGacha", () => {
+      it("ランダムにポケモンを選択する", () => {
+        const gacha = new PokemonGacha('easy')
+        gacha.randomSelectPokemon = jest.fn()
+
+        gacha.start()
+
+        expect(gacha.randomSelectPokemon).toHaveBeenCalled()
+
+      });
+    });
+  });
 });
