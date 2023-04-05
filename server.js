@@ -1,14 +1,11 @@
-const http = require('http');
-const fs = require('fs');
+import express from 'express';
+const app = express();
 
-var server = http.createServer(
-    (request,response)=>{
-        fs.readFile('./index.html','UTF-8',(error,data)=>{
-            response.writeHead(200, {'Content-Type':'text/html'});
-            response.write(data);
-            response.end();
-        })
-       
-    }
-);
-server.listen(3000);
+
+app.use(express.static('public'));
+app.get('/', (req, res) => {
+    // es.sendFile(__dirname + '/public/index.html');
+}); 
+app.listen(3000, () => {
+    console.log('Start server port:3000');
+});

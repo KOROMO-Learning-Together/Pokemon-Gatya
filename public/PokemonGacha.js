@@ -1,4 +1,4 @@
-class PokemonGacha {
+export class PokemonGacha {
     constructor(mode){
         mode = mode;
     }
@@ -430,4 +430,3 @@ class PokemonGacha {
         pageElement.appendChild(mainContainer);
     }
 }
-module.exports = PokemonGacha;

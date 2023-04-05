@@ -2,7 +2,8 @@
   "name": "koromo",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "type": "module",
+  "main": "./public/main.js",
   "scripts": {
     "test": "jest"
   },
@@ -19,5 +20,8 @@
   "devDependencies": {
     "jest": "^29.5.0",
     "jsdom": "^21.1.1"
+  },
+  "dependencies": {
+    "express": "^4.18.2"
   }
 }

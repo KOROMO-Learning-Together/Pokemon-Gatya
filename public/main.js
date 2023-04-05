@@ -1,5 +1,7 @@
 'use strict';
 
+import {PokemonGacha} from './PokemonGacha.js'
+
 //Gachaのインスタンスを作成
 const gacha = new PokemonGacha('easy')
 
