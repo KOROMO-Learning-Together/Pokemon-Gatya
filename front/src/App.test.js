@@ -16,5 +16,5 @@ import App from './App';
     });
 
     describe("PokemonGachaテスト", ()=>{
-      it("ボタンを押したらMath.randomを読んでいる", ()=)
+      it("ボタンを押したらMath.randomを読んでいる", ()=>{})
     })
