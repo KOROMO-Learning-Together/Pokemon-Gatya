@@ -62,7 +62,7 @@ body {
     height: 250px;
     width: 100%;
     height: 40%;
-    background-image: url(Monsterball_BG2.png);
+    background-image: url(../images/Monsterball_BG2.png);
     justify-content: center;
     align-items: center;
 }
@@ -71,7 +71,7 @@ body {
     display: flex;
     height: 100px;
     width: 100%;
-    background-image: url(Monsterball_BG2.png);
+    background-image: url(../images/Monsterball_BG2.png);
     justify-content: center
 }
 

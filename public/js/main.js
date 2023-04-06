@@ -19,10 +19,10 @@ function click(){
 
 function mouseOver(){
     //マウスホバーで画像を切り替え
-    buttonImg.src='gachaButtonHover.png'
+    buttonImg.src='images/gachaButtonHover.png'
 }
 
 function mouseOut(){
     //マウスが離れたら画像を元に戻す
-    buttonImg.src='gachaButton.png'
+    buttonImg.src='images/gachaButton.png'
 }

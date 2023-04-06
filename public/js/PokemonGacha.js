@@ -27,13 +27,13 @@ export class PokemonGacha {
         const video = document.createElement('video');
         video.id = 'gacha';
         if(this.monsterBall === 'superBall'){
-            video.src = './gachaActionSuper.mov';
+            video.src = 'videos/gachaActionSuper.mov';
         } else if(this.monsterBall === 'hyperBall'){
-            video.src = './gachaActionHyper.mov';
+            video.src = 'videos/gachaActionHyper.mov';
         } else if(this.monsterBall === 'masterBall'){
-            video.src = './gachaActionMaster.mov';
+            video.src = 'videos/gachaActionMaster.mov';
         } else {
-            video.src = './gachaAction.mov';
+            video.src = 'videos/gachaAction.mov';
         }
         video.autoplay = true;
         video.muted = true;
@@ -69,9 +69,9 @@ export class PokemonGacha {
         continueButton.onclick = this.continue
         const buttonImg = document.createElement('img');
         buttonImg.id = 'continueButtonImg'
-        buttonImg.src = 'continueButton.svg'
-        buttonImg.onmouseenter = ()=>{buttonImg.src = 'continueButtonHover.svg'}
-        buttonImg.onmouseout = ()=>{buttonImg.src = 'continueButton.svg'}
+        buttonImg.src = 'images/continueButton.svg'
+        buttonImg.onmouseenter = ()=>{buttonImg.src = 'images/continueButtonHover.svg'}
+        buttonImg.onmouseout = ()=>{buttonImg.src = 'images/continueButton.svg'}
         continueButton.appendChild(buttonImg)
 
         const footer = document.createElement('div')
@@ -112,19 +112,19 @@ export class PokemonGacha {
         pokemonGender.id = 'pokemonGender'
         if(this.species.gender_rate === 8){
             const pokemonFemale = document.createElement('img');
-            pokemonFemale.src = 'icon_female.svg'
+            pokemonFemale.src = 'images/icon_female.svg'
             pokemonGender.appendChild(pokemonFemale)
         } else if(this.species.gender_rate === 0){
             const pokemonMale = document.createElement('img');
-            pokemonMale.src = 'icon_male.svg'
+            pokemonMale.src = 'images/icon_male.svg'
             pokemonGender.appendChild(pokemonMale)
         } else if(this.species.gender_rate === -1){
             pokemonGender.innerHTML = '不明'
         } else {
             const pokemonFemale = document.createElement('img');
-            pokemonFemale.src = 'icon_female.svg'
+            pokemonFemale.src = 'images/icon_female.svg'
             const pokemonMale = document.createElement('img');
-            pokemonMale.src = 'icon_male.svg'
+            pokemonMale.src = 'images/icon_male.svg'
             pokemonGender.appendChild(pokemonFemale)
             pokemonGender.appendChild(pokemonMale)
         }
@@ -408,18 +408,19 @@ export class PokemonGacha {
         const gachaButton = document.createElement('Button');
         gachaButton.id = 'gachaButton';
         gachaButton.type = 'button';
+        // error エラー mainが何か定義されていない？
         gachaButton.onclick = main;
 
         const gachaButtonImg = document.createElement('img');
         gachaButtonImg.id = 'gachaButtonImg'
-        gachaButtonImg.src = 'gachaButton.png'
-        gachaButton.onmouseenter = ()=>{gachaButtonImg.src = 'gachaButtonHover.png'}
-        gachaButton.onmouseout = ()=>{gachaButtonImg.src = 'gachaButton.png'}
+        gachaButtonImg.src = 'images/gachaButton.png'
+        gachaButton.onmouseenter = ()=>{gachaButtonImg.src = 'images/gachaButtonHover.png'}
+        gachaButton.onmouseout = ()=>{gachaButtonImg.src = 'images/gachaButton.png'}
         gachaButtonImg.alt = 'button'
         
         const initialScreen = document.createElement('img');
         initialScreen.id = 'initialScreen';
-        initialScreen.src = 'start.png';
+        initialScreen.src = 'images/start.png';
         initialScreen.alt= 'start'
 
         mainContainer.appendChild(initialScreen)

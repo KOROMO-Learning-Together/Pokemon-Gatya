@@ -1,6 +1,6 @@
 const fs = require("fs");
 const { JSDOM } = require("jsdom");
-const {PokemonGacha} = require('./PokemonGacha') 
+const {PokemonGacha} = require('./js/PokemonGacha') 
 
 
 describe("ポケモンガチャのtest", () => {
@@ -41,7 +41,7 @@ describe("ポケモンガチャのtest", () => {
       it("start.pngを参照して表示している", () => {
         const initialScreen = document.getElementById('initialScreen')
         expect(initialScreen.tagName).toBe('IMG');
-        expect(initialScreen.src).toBe('start.png');
+        expect(initialScreen.src).toContain('start.png');
       });
     });
     describe("gachaButton", () => {
@@ -74,17 +74,17 @@ describe("ポケモンガチャのtest", () => {
       });
 
       it("gachaButton.pngを表示している", () => {
-        expect(gachaButtonImg.src).toEqual('gachaButton.png');
+        expect(gachaButtonImg.src).toContain('gachaButton.png');
       });
 
       it("MouseHoverで画像が切り替わる", () => {
         const mouseover = new jsdom.MouseEvent('mouseover')
         gachaButtonImg.dispatchEvent(mouseover)
-        expect(gachaButtonImg.src).toBe('gachaButtonHover.png');
+        expect(gachaButtonImg.src).toContain('gachaButtonHover.png');
 
         const mouseout = new jsdom.MouseEvent('mouseout')
         gachaButtonImg.dispatchEvent(mouseout);
-        expect(gachaButtonImg.src).toBe('gachaButton.png');
+        expect(gachaButtonImg.src).toContain('gachaButton.png');
       });
     });
   });
