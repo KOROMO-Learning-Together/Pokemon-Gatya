@@ -1,6 +1,6 @@
 const fs = require("fs");
 const { JSDOM } = require("jsdom");
-const PokemonGacha = require('./PokemonGacha') 
+const {PokemonGacha} = require('./PokemonGacha') 
 
 
 describe("ポケモンガチャのtest", () => {
@@ -9,7 +9,7 @@ describe("ポケモンガチャのtest", () => {
   let gacha;
   beforeEach(() => {
     //index.htmlをテキストとして読み込む
-    const indexHtmlText = fs.readFileSync("./index.html", {
+    const indexHtmlText = fs.readFileSync(__dirname +"/index.html", {
       encoding: "utf-8",
     });
     //テキストを仮想DOMにする
