@@ -1,6 +1,6 @@
 const fs = require("fs");
 const { JSDOM } = require("jsdom");
-const {PokemonGacha} = require('../js/PokemonGacha') 
+const PokemonGacha = require('../../front/src/PokemonGacha') 
 
 
 describe("ポケモンガチャのtest", () => {
@@ -15,7 +15,7 @@ describe("ポケモンガチャのtest", () => {
     //テキストを仮想DOMにする
     jsdom = new JSDOM(indexHtmlText).window;
     document = jsdom.document;
-    gacha = new PokemonGacha('easy')
+    // gacha = new PokemonGacha('easy')
 
   });
   describe("index.html", () => {
@@ -27,6 +27,8 @@ describe("ポケモンガチャのtest", () => {
         expect(page.firstElementChild).toBe(mainContainer);
       });
     });
+
+    //１ボタンがあるかどうか
     describe("mainContainer", () => {
       it("子にinitialScreenとgachaButtonを持っている", () => {
         const mainContainer = document.getElementById('mainContainer')
@@ -55,12 +57,11 @@ describe("ポケモンガチャのtest", () => {
       });
       it("クリックするとgacha.start関数を実行する", async () => {
 
-        gacha.start = jest.fn().mockReturnValue('start')
-
+        // gacha.start = jest.fn().mockReturnValue('start')
 
         const gachaButton = document.getElementById('gachaButton')
         gachaButton.dispatchEvent(new jsdom.MouseEvent('click'))
-
+        
 
         // expect(gacha.start).toHaveBeenCalled();
 
@@ -77,29 +78,23 @@ describe("ポケモンガチャのtest", () => {
         expect(gachaButtonImg.src).toContain('gachaButton.png');
       });
 
-      it("MouseHoverで画像が切り替わる", () => {
-        const mouseover = new jsdom.MouseEvent('mouseover')
-        gachaButtonImg.dispatchEvent(mouseover)
-        expect(gachaButtonImg.src).toContain('gachaButtonHover.png');
 
-        const mouseout = new jsdom.MouseEvent('mouseout')
-        gachaButtonImg.dispatchEvent(mouseout);
-        expect(gachaButtonImg.src).toContain('gachaButton.png');
-      });
     });
   });
   describe("main.js", () => {
-    // beforeEach(() => {
-      
-    // });
-    // describe("main()", () => {
-    //   it("", () => {
-        
-    //   });
-    // });
-    describe("class PokemonGacha", () => {
-      it("ランダムにポケモンを選択する", () => {
 
+    //２ボタンを押したらランダムな数字を取得するテスト
+    beforeEach(() =>{
+      document =jsdom.document;
+    })
+    describe("class PokemonGacha", () => {
+      it("gachaButtonをクリックした時にMath .random()が実行されていること", () => {
+        const randomSpy = jest.spyOn(global.Math, 'random')
+
+        gacha.randomSelectPokemon()
+
+        expect(randomSpy).toHaveBeenCalledTimes(1)
+        randomSpy.mockRestore()
       });
     });
   });

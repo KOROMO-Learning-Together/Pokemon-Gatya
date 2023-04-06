@@ -1,5 +1,4 @@
-'use strict';
-
+import axios from 'axios';
 import {PokemonGacha} from './PokemonGacha.js'
 
 //Gachaのインスタンスを作成
@@ -12,7 +11,7 @@ const buttonImg = document.getElementById('gachaButtonImg');
 buttonImg.addEventListener('mouseover',mouseOver)
 buttonImg.addEventListener('mouseout',mouseOut)
 
-function click(){
+async function click(){
     //Gachaをスタート
     gacha.start()
 }
