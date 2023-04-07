@@ -7,9 +7,10 @@ import { PokemonGacha } from './PokemonGacha';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
+const pokemonGacha = new PokemonGacha('easy')
 root.render(
   <React.StrictMode>
-    <App PokemonGacha={PokemonGacha}/>
+    <App PokemonGacha={pokemonGacha}/>
   </React.StrictMode>
 );
 

@@ -1,16 +1,32 @@
-import { SpyPokemonGacha } from "./SpyPokemonGacha";
+import { useState } from "react";
 
-function App(PokemonGacha) {
 
-  // const gacha = new SpyPokemonGacha('easy')
+function App(props) {
+  const[gachaButtonImg, setGachaButtonImg] = useState("images/gachaButton.png")
+
+  function mouseOver(){
+      //マウスホバーで画像を切り替え
+      setGachaButtonImg("images/gachaButtonHover.png")
+  }
+
+  function mouseOut(){
+      //マウスが離れたら画像を元に戻す
+      setGachaButtonImg("images/gachaButton.png")
+  }
+
 
   return (
     <div className="App">
       <div id="page">
         <div id='mainContainer'>
             <img id='initialScreen' src='images/start.png' alt='start'/>
-            <button id='gachaButton' type='button' onClick={()=>{PokemonGacha.start()}}>
-                <img id='gachaButtonImg' src='images/gachaButton.png' alt="button"/>
+            <button id='gachaButton' type='button' onClick={()=>{props.PokemonGacha.start()}}>
+                <img id='gachaButtonImg' 
+                src={gachaButtonImg} 
+                alt="button"
+                onMouseOver={mouseOver}
+                onMouseOut={mouseOut}
+                />
             </button>
         </div>
       </div>

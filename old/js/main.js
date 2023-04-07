@@ -1,5 +1,4 @@
-import axios from 'axios';
-import {PokemonGacha} from './PokemonGacha.js'
+import {PokemonGacha} from '../../front/src/PokemonGacha.js'
 
 //Gachaのインスタンスを作成
 const gacha = new PokemonGacha('easy')
@@ -18,10 +17,10 @@ async function click(){
 
 function mouseOver(){
     //マウスホバーで画像を切り替え
-    buttonImg.src='images/gachaButtonHover.png'
+    buttonImg.src=process.env.PUBLIC_URL + '/images/gachaButtonHover.png'
 }
 
 function mouseOut(){
     //マウスが離れたら画像を元に戻す
-    buttonImg.src='images/gachaButton.png'
+    buttonImg.src=process.env.PUBLIC_URL + '/images/gachaButton.png'
 }
