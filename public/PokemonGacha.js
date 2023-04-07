@@ -16,10 +16,20 @@ export class PokemonGacha {
         this.randomSelectMonsterBall()
 
         // ゲットするポケモンを決める
-        this.randomSelectPokemon()
+        await this.randomSelectPokemon()
 
         // ガチャのアクションを再生
         this.gachaAction()
+    }
+
+    mouseover(){
+        const buttonImg = document.getElementById('gachaButtonImg');
+        buttonImg.src = 'gachaButtonHover.png'
+    }
+
+    mouseout(){
+        const buttonImg = document.getElementById('gachaButtonImg');
+        buttonImg.src = 'gachaButton.png'
     }
 
     gachaAction(){
@@ -42,31 +52,33 @@ export class PokemonGacha {
         const pageElement = document.getElementById("page")
         pageElement.appendChild(video);
 
-        // 再生終了時のアクション => ゲットしたポケモンの画像とステータスを表示
-	    video.addEventListener("ended", async () => {await this.showPokemon()}, false);
+        // 再生終了時のアクション
+	    video.addEventListener("ended", async () => {
+            // 表示している動画のフレームを削除
+            const gacha = document.getElementById('gacha');
+            gacha.remove()
+            // ゲットしたポケモンの画像とステータスを表示
+            await this.showPokemon()
+        }, false);
     }
 
     async showPokemon(){
-        // 表示している動画のフレームを削除
-        const gacha = document.getElementById('gacha');
-        gacha.remove()
-
         // ポケモンの画像を取得
         const pokemonImg = await this.makePokemonImg()
 
         // ポケモンのステータス表示を作成
-        const pokemonStatus = await this.makePkemonStatus()
+        // const pokemonStatus = await this.makePkemonStatus()
 
         // 画面を作成
         const pokemonWindow = document.createElement('div');
         pokemonWindow.id = 'pokemonWindow'
         pokemonWindow.appendChild(pokemonImg);
-        pokemonWindow.appendChild(pokemonStatus);
+        // pokemonWindow.appendChild(pokemonStatus);
 
         // コンティニューボタンを作成
         const continueButton = document.createElement('button');
         continueButton.id = 'continueButton'
-        continueButton.onclick = this.continue
+        continueButton.onclick = ()=>{this.continue(this)}
         const buttonImg = document.createElement('img');
         buttonImg.id = 'continueButtonImg'
         buttonImg.src = 'continueButton.svg'
@@ -86,11 +98,13 @@ export class PokemonGacha {
         pageElement.appendChild(pokemonWindow);
 
     }
-
+    // ポケモンの画像を取得するためのメソッド
     async makePokemonImg(){
         // ポケモンの画像を取得する
+        // ランダムに取得したポケモンのデータから必要な画像のURLを抽出して画像データを取得する
         let res = await fetch(this.pokemon.sprites.other.home.front_default)
         const blob = await res.blob()
+        // 取得した画像データをimgタグに貼り付ける
         const pokemonImg = document.createElement('img');
         pokemonImg.id = 'pokemonImg'
         pokemonImg.src = URL.createObjectURL(blob);
@@ -372,7 +386,7 @@ export class PokemonGacha {
 
     async randomSelectPokemon(){
         // ランダムなポケモンIDを生成
-        const pokemonId = Math.floor(Math.random()*721)
+        const pokemonId = Math.floor(Math.random()*1000)
         // pokeAPIからポケモンの情報を取得
         const res = await fetch(`https://pokeapi.co/api/v2/pokemon/${pokemonId}/`)
         // プロパティに格納
@@ -396,19 +410,18 @@ export class PokemonGacha {
     }
 
     
-    continue(){
+    continue(gacha){
         // getしたポケモンを消す
         const pokemonWindow = document.getElementById('pokemonWindow')
         pokemonWindow.remove()
-
+        
         // 初期状態の画面を作る
         const mainContainer = document.createElement('div');
         mainContainer.id = 'mainContainer';
-
         const gachaButton = document.createElement('Button');
         gachaButton.id = 'gachaButton';
         gachaButton.type = 'button';
-        gachaButton.onclick = main;
+        gachaButton.onclick = ()=>{gacha.start()};
 
         const gachaButtonImg = document.createElement('img');
         gachaButtonImg.id = 'gachaButtonImg'

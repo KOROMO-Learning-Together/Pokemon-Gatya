@@ -5,7 +5,7 @@
   "type": "module",
   "main": "./public/main.js",
   "scripts": {
-    "test": "jest"
+    "test": "NODE_OPTIONS=--experimental-vm-modules jest"
   },
   "repository": {
     "type": "git",
@@ -23,5 +23,10 @@
   },
   "dependencies": {
     "express": "^4.18.2"
+  },
+  "jest": {
+    "moduleNameMapper": {
+      "src(.*)$": "<rootDir>/public/$1"
+    }
   }
 }
