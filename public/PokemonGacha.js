@@ -67,13 +67,13 @@ export class PokemonGacha {
         const pokemonImg = await this.makePokemonImg()
 
         // ポケモンのステータス表示を作成
-        // const pokemonStatus = await this.makePkemonStatus()
+        const pokemonStatus = await this.makePkemonStatus()
 
         // 画面を作成
         const pokemonWindow = document.createElement('div');
         pokemonWindow.id = 'pokemonWindow'
         pokemonWindow.appendChild(pokemonImg);
-        // pokemonWindow.appendChild(pokemonStatus);
+        pokemonWindow.appendChild(pokemonStatus);
 
         // コンティニューボタンを作成
         const continueButton = document.createElement('button');
