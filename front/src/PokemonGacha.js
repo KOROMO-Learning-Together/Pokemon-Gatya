@@ -1,19 +1,15 @@
-// import axios from 'axios';
 
 export class PokemonGacha {
 
     constructor(mode){
-                mode = mode;
+                this.mode = mode;
             }    
-    async start(){
+    start(){
         console.log("start")
-        // console.log(await axios.get("https://pokeapi.co/api/v2/pokemon/25/"))
-
+        const randomNumber = Math.random() * 3
+        console.log(randomNumber)
     }
 }
-//     constructor(mode){
-//         mode = mode;
-//     }
 
 //     pokemon = {}
 //     species = {}
