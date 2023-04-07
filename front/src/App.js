@@ -20,14 +20,15 @@ function App(props) {
       <div id="page">
         <div id='mainContainer'>
             <img id='initialScreen' src='images/start.png' alt='start'/>
-            <button id='gachaButton' type='button' onClick={()=>{props.PokemonGacha.start()}}>
+            {/* Appのテストを通すときはここのコメントアウトを外す */}
+            {/* <button id='gachaButton' type='button' onClick={()=>{props.PokemonGacha.start()}}>
                 <img id='gachaButtonImg' 
                 src={gachaButtonImg} 
                 alt="button"
                 onMouseOver={mouseOver}
                 onMouseOut={mouseOut}
                 />
-            </button>
+            </button> */}
         </div>
       </div>
     </div>
