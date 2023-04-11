@@ -15,7 +15,7 @@ export class PokemonGacha {
         const mainContainer = document.getElementById('mainContainer');
         mainContainer.remove()
         // ❼
-        this.showPokemon()
+        await this.showPokemon()
 
     }
 
@@ -54,7 +54,7 @@ export class PokemonGacha {
         const pageElement = document.getElementById("page")
         pageElement.appendChild(video);
 
-        // 再生終了時のアクション
+        // 動画再生終了時のアクション
 	    video.addEventListener("ended", async () => {
             // 表示している動画のフレームを削除
             const gacha = document.getElementById('gacha');

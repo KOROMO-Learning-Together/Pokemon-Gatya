@@ -162,13 +162,15 @@ describe("ポケモンガチャ全体のテスト", () => {
       });
     });
     describe("randomSelectPokemonを実行すると", () => {
+      beforeEach(()=>{
+        // arange
+        Math.random = jest.fn().mockReturnValue(1)
+        Math.floor = jest.fn().mockReturnValue(1000)
+        fetch = jest.fn().mockResolvedValue({json:jest.fn().mockResolvedValue('hogePokemonData')})
+      })
       // ❷
       it("Math.randomを使って0~1の乱数を生成している", async () => {
         // arange
-        Math.random = jest.fn()
-        Math.floor = jest.fn()
-        fetch = jest.fn().mockResolvedValue({json:jest.fn().mockResolvedValue('hogePokemonData')})
-        
         // act
         await gacha.randomSelectPokemon()
 
@@ -177,25 +179,17 @@ describe("ポケモンガチャ全体のテスト", () => {
       });
       // ❸
       it("Math.floorを使って0~1の乱数を1~1000の整数に変換している", async () => {
-        // 1000までの整数を作るためにMath.randomで生成した乱数を1000倍にして整数に変換する
+        // 1000までの整数を作るためにMath.randomで生成した乱数を1000倍にしてから整数に変換する
         // arange
-        Math.random = jest.fn().mockReturnValue(0.001)
-        Math.floor = jest.fn()
-        fetch = jest.fn().mockResolvedValue({json:jest.fn().mockResolvedValue('hogePokemonData')})
-        
         // act
         await gacha.randomSelectPokemon()
 
         // assert
-        expect(Math.floor).toHaveBeenCalledWith(1)
+        expect(Math.floor).toHaveBeenCalledWith(1000)
       });
       // ❹
       it("fetchに生成した整数をポケモンIDとして渡している", async () => {
          // arange
-         Math.random = jest.fn()
-         Math.floor = jest.fn().mockReturnValue(1000)
-         fetch = jest.fn().mockResolvedValue({json:jest.fn().mockResolvedValue('hogePokemonData')})
- 
          // act
          await gacha.randomSelectPokemon()
  
@@ -205,10 +199,6 @@ describe("ポケモンガチャ全体のテスト", () => {
       // ❺
       it("fetchのレスポンスをpokemonに保存している", async () => {
         // arange
-        Math.random = jest.fn()
-        Math.floor = jest.fn()
-        fetch = jest.fn().mockResolvedValue({json:jest.fn().mockResolvedValue('hogePokemonData')})
-
         // act
         await gacha.randomSelectPokemon()
 
@@ -217,12 +207,18 @@ describe("ポケモンガチャ全体のテスト", () => {
       });
     });
     describe("showPokemonメソッドを実行すると", () => {
+      beforeEach(()=>{
+        // ポケモンの画像を取得するためのメソッド
+        // 今回はこれを使っていればOK
+        const hogePokemonImg = document.createElement('div')
+        hogePokemonImg.id = 'hogehogePokemon'
+        gacha.makePokemonImg = jest.fn().mockResolvedValue(hogePokemonImg)
+        const mainContainer = document.getElementById('mainContainer');
+        mainContainer.remove()
+      })
       // ❽
       it("ポケモンの画像を取得する", async () => {
         // arange
-        // ポケモンの画像を取得するためのメソッド
-        // 今回はこれを使っていればOK
-        gacha.makePokemonImg = jest.fn().mockResolvedValue(document.createElement('div'))
 
         // act
         await gacha.showPokemon()
@@ -233,23 +229,18 @@ describe("ポケモンガチャ全体のテスト", () => {
       // ❾
       it("ポケモンの画像を表示する", async () => {
         // arange
-        const hogePokemonImg = document.createElement('div')
-        hogePokemonImg.id = 'hogehogePokemon'
-        gacha.makePokemonImg = jest.fn().mockResolvedValue(hogePokemonImg)
-        const mainContainer = document.getElementById('mainContainer');
-        mainContainer.remove()
 
         // act
         await gacha.showPokemon()
 
         // assert
+        const page = document.getElementById('page')
         const pokemonWindow = document.getElementById('pokemonWindow')
-        console.log(pokemonWindow)
         const result = document.getElementById('hogehogePokemon')
-        console.log(result)
+        expect(page.childElementCount).toBe(1);
+        expect(page.firstElementChild).toBe(pokemonWindow);
         expect(pokemonWindow.childElementCount).toBe(1);
         expect(pokemonWindow.firstElementChild).toBe(result);
-        
       });
     });
   });
