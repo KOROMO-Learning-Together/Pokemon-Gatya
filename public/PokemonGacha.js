@@ -9,12 +9,12 @@ export class PokemonGacha {
 
     // ボタンがクリックされたときに実行されるメソッド
     async start(){
-        // ❶
+        // 1-❶
         await this.randomSelectPokemon()
-        // ❻
+        // 1-❻
         const mainContainer = document.getElementById('mainContainer');
         mainContainer.remove()
-        // ❼
+        // 1-❼
         await this.showPokemon()
 
     }
@@ -66,9 +66,9 @@ export class PokemonGacha {
 
     // ゲットしたポケモンを表示するメソッド
     async showPokemon(){
-        // ❽
+        // 1-❽
         const pokemonImg = await this.makePokemonImg()
-        // ❾
+        // 1-❾
         const pokemonWindow = document.createElement('div');
         pokemonWindow.id = 'pokemonWindow';
         pokemonWindow.appendChild(pokemonImg)
@@ -141,11 +141,11 @@ export class PokemonGacha {
 
     // ランダムなポケモンの情報を外部APIから取得するためのメソッド
     async randomSelectPokemon(){
-        // ❷　❸
+        // 1-❷　1-❸
         const pokemonId = Math.floor(Math.random()*1000)
-        // ❹
+        // 1-❹
         const res = await fetch(`https://pokeapi.co/api/v2/pokemon/${pokemonId}/`)
-        // ❺
+        // 1-❺
         this.pokemon = await res.json()
         
     }

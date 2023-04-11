@@ -122,7 +122,7 @@ describe("ポケモンガチャ全体のテスト", () => {
   // day1 ここからやっていきます。
   describe("PokemonGacha.jsについてのテスト", () => {
     describe("startメソッドを実行すると", () => {
-      // ❶
+      // 1-❶
       it("randomSelectPokemonを呼び出す", async () => {
         // arange
         gacha.randomSelectPokemon = jest.fn()
@@ -134,7 +134,7 @@ describe("ポケモンガチャ全体のテスト", () => {
         // assert
         expect(gacha.randomSelectPokemon).toHaveBeenCalled()
       });
-      // ❻
+      // 1-❻
       it("mainContainerの要素を全て消す", async () => {
         // arange
         gacha.randomSelectPokemon = jest.fn()
@@ -148,7 +148,7 @@ describe("ポケモンガチャ全体のテスト", () => {
         // assert
         expect(mainContainer.remove).toHaveBeenCalled()
       });
-      // ❼
+      // 1-❼
       it("showPokemonを呼び出す", async () => {
         // arange
         gacha.randomSelectPokemon = jest.fn().mockResolvedValue('hogePokemon')
@@ -168,7 +168,7 @@ describe("ポケモンガチャ全体のテスト", () => {
         Math.floor = jest.fn().mockReturnValue(1000)
         fetch = jest.fn().mockResolvedValue({json:jest.fn().mockResolvedValue('hogePokemonData')})
       })
-      // ❷
+      // 1-❷
       it("Math.randomを使って0~1の乱数を生成している", async () => {
         // arange
         // act
@@ -177,7 +177,7 @@ describe("ポケモンガチャ全体のテスト", () => {
         // assert
         expect(Math.random).toHaveBeenCalled()
       });
-      // ❸
+      // 1-❸
       it("Math.floorを使って0~1の乱数を1~1000の整数に変換している", async () => {
         // 1000までの整数を作るためにMath.randomで生成した乱数を1000倍にしてから整数に変換する
         // arange
@@ -187,7 +187,7 @@ describe("ポケモンガチャ全体のテスト", () => {
         // assert
         expect(Math.floor).toHaveBeenCalledWith(1000)
       });
-      // ❹
+      // 1-❹
       it("fetchに生成した整数をポケモンIDとして渡している", async () => {
          // arange
          // act
@@ -196,7 +196,7 @@ describe("ポケモンガチャ全体のテスト", () => {
          // assert
          expect(fetch).toHaveBeenCalledWith('https://pokeapi.co/api/v2/pokemon/1000/')
       });
-      // ❺
+      // 1-❺
       it("fetchのレスポンスをpokemonに保存している", async () => {
         // arange
         // act
@@ -211,13 +211,16 @@ describe("ポケモンガチャ全体のテスト", () => {
         // ポケモンの画像を取得するためのメソッド
         // 今回はこれを使っていればOK
         const hogePokemonImg = document.createElement('div')
-        hogePokemonImg.id = 'hogehogePokemon'
+        hogePokemonImg.id = 'hogePokemonImg'
         gacha.makePokemonImg = jest.fn().mockResolvedValue(hogePokemonImg)
         const mainContainer = document.getElementById('mainContainer');
         mainContainer.remove()
+        const hogePokemonStatus = document.createElement('div')
+        hogePokemonStatus.id = 'hogePokemonStatus'
+        gacha.makePokemonStatus = jest.fn().mockResolvedValue(hogePokemonStatus)
       })
-      // ❽
-      it("ポケモンの画像を取得する", async () => {
+      // 1-❽
+      it("ポケモンの画像を作成する", async () => {
         // arange
 
         // act
@@ -226,7 +229,7 @@ describe("ポケモンガチャ全体のテスト", () => {
         // assert
         expect(gacha.makePokemonImg).toHaveBeenCalled()
       });
-      // ❾
+      // 1-❾
       it("ポケモンの画像を表示する", async () => {
         // arange
 
@@ -236,15 +239,68 @@ describe("ポケモンガチャ全体のテスト", () => {
         // assert
         const page = document.getElementById('page')
         const pokemonWindow = document.getElementById('pokemonWindow')
-        const result = document.getElementById('hogehogePokemon')
+        const result = document.getElementById('hogePokemonImg')
         expect(page.childElementCount).toBe(1);
         expect(page.firstElementChild).toBe(pokemonWindow);
         expect(pokemonWindow.childElementCount).toBe(1);
         expect(pokemonWindow.firstElementChild).toBe(result);
       });
+
+      // ここからDay2
+      // pokemonのステータスを表示したい。。。
+
+      // 2-❶
+      it("ポケモンのステータスを作成する", async () => {
+        // arange
+
+        // act
+        await gacha.showPokemon()
+
+        // assert
+        expect(gacha.makePokemonStatus).toHaveBeenCalled()
+      });
+      // 2-❷
+      it("ポケモンのステータスを表示する", async () => {
+        // arange
+
+        // act
+        await gacha.showPokemon()
+
+        // assert
+        const pokemonWindow = document.getElementById('pokemonWindow')
+        const result = document.getElementById('hogePokemonStatus')
+        expect(pokemonWindow.childElementCount).toBe(2);
+        expect(pokemonWindow.lastElementChild).toBe(result);
+      });
+    });
+    describe("makePokemonStatusメソッドを実行すると", () => {
+      beforeEach(async ()=>{
+        // ピカチュウのデータをpokemonに格納しておく
+        const res = await fetch('https://pokeapi.co/api/v2/pokemon/25/')
+        gacha.pokemon = await res.json()
+      })
+      // 2-❸
+      it("ポケモンの身長を表示する", async () => {
+        // arange
+
+        // act
+        await gacha.makePokemonStatus()
+
+        // assert
+        const  height = document.getElementById('height')
+        expect(height.innerHTML).toBe('身長：40cm')
+      });
+      // 2-❹
+      it("ポケモンの体重を表示する", async () => {
+        // arange
+
+        // act
+        await gacha.showPokemon()
+
+        // assert
+        const  height = document.getElementById('weight')
+        expect(height.innerHTML).toBe('体重：6.0kg')
+      });
     });
   });
-  // ここからDay2
-  // まずはボタンから作り始める
-
 });
