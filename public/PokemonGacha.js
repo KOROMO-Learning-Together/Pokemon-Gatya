@@ -67,7 +67,7 @@ export class PokemonGacha {
         const pokemonImg = await this.makePokemonImg()
 
         // ポケモンのステータス表示を作成
-        const pokemonStatus = await this.makePkemonStatus()
+        const pokemonStatus = await this.makePokemonStatus()
 
         // 画面を作成
         const pokemonWindow = document.createElement('div');
@@ -155,7 +155,7 @@ export class PokemonGacha {
         return header
     }
 
-    async makePkemonStatus(){
+    async makePokemonStatus(){
         const statusL = document.createElement('div');
         statusL.id =  'statusL'
 
