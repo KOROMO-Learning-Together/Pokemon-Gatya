@@ -16,7 +16,7 @@ describe("ポケモンガチャ全体のテスト", () => {
     originalFetch = Object.create(global.fetch);
   });
 
-  beforeEach(() => {
+  beforeEach(async () => {
     //index.htmlをテキストとして読み込む
     const indexHtmlText = fs.readFileSync("./public/index.html", {
       encoding: "utf-8",
@@ -41,6 +41,7 @@ describe("ポケモンガチャ全体のテスト", () => {
     const buttonImg = document.getElementById('gachaButtonImg');
     buttonImg.addEventListener('mouseover',()=>{gacha.mouseover()})
     buttonImg.addEventListener('mouseout',()=>{gacha.mouseout()})
+
   });
 
   afterEach(()=>{
@@ -149,7 +150,7 @@ describe("ポケモンガチャ全体のテスト", () => {
         // assert
         expect(mainContainer.remove).toHaveBeenCalled()
       });
-      // 1-❼
+      // 1-❼ ⇨ 3-❶
       it("showPokemonを呼び出す", async () => {
         // arange
         gacha.randomSelectPokemon = jest.fn().mockResolvedValue('hogePokemon')
@@ -270,8 +271,8 @@ describe("ポケモンガチャ全体のテスト", () => {
         // assert
         const pokemonWindow = document.getElementById('pokemonWindow')
         const result = document.getElementById('hogePokemonStatus')
-        expect(pokemonWindow.childElementCount).toBe(2);
-        expect(pokemonWindow.lastElementChild).toBe(result);
+        expect(pokemonWindow.childElementCount).toBe(3);
+        expect(pokemonWindow.children[1]).toBe(result);
       });
     });
     describe("makePokemonStatusメソッドを実行すると", () => {
