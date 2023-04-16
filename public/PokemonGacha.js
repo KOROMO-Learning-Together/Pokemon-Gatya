@@ -16,7 +16,6 @@ export class PokemonGacha {
         mainContainer.remove()
         // 1-❼
         await this.showPokemon()
-
     }
 
     // ボタンにカーソルが乗ったときに実行されるメソッド
@@ -74,7 +73,6 @@ export class PokemonGacha {
         pokemonWindow.appendChild(pokemonImg)
         const page = document.getElementById('page')
         page.appendChild(pokemonWindow)
-
     }
 
     // ポケモンの画像を取得した情報から作成するためのメソッド
@@ -135,7 +133,7 @@ export class PokemonGacha {
     }
 
     // ポケモンのステータスを取得した情報から作成するためのメソッド
-    async makePkemonStatus(){
+    async makePokemonStatus(){
         
     }
 
@@ -147,7 +145,6 @@ export class PokemonGacha {
         const res = await fetch(`https://pokeapi.co/api/v2/pokemon/${pokemonId}/`)
         // 1-❺
         this.pokemon = await res.json()
-        
     }
 
     // ランダムに動画で表示するモンスターボールを選択するためのメソッド

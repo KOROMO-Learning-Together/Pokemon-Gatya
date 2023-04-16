@@ -2,6 +2,7 @@ import fs from "fs";``
 import {PokemonGacha} from './PokemonGacha.js';
 import { JSDOM } from "jsdom";
 import { jest } from '@jest/globals';
+import pikachu from './pikachu.json'
 
 describe("ポケモンガチャ全体のテスト", () => {
   let jsdom;
@@ -274,10 +275,10 @@ describe("ポケモンガチャ全体のテスト", () => {
       });
     });
     describe("makePokemonStatusメソッドを実行すると", () => {
+
       beforeEach(async ()=>{
         // ピカチュウのデータをpokemonに格納しておく
-        const res = await fetch('https://pokeapi.co/api/v2/pokemon/25/')
-        gacha.pokemon = await res.json()
+        gacha.pokemon = pikachu
       })
       // 2-❸
       it("ポケモンの身長を表示する", async () => {
@@ -295,7 +296,7 @@ describe("ポケモンガチャ全体のテスト", () => {
         // arange
 
         // act
-        await gacha.showPokemon()
+        await gacha.makePokemonStatus()
 
         // assert
         const  height = document.getElementById('weight')
