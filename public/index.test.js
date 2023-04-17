@@ -280,27 +280,42 @@ describe("ポケモンガチャ全体のテスト", () => {
         // ピカチュウのデータをpokemonに格納しておく
         gacha.pokemon = pikachu
       })
+      
       // 2-❸
+      it("ポケモンのステータスを表示する", async () => {
+        // arange
+
+        // act
+        const status = await gacha.makePokemonStatus()
+
+        // assert
+        expect(status.id).toBe('status')
+      });
+
+      // 2-❹
       it("ポケモンの身長を表示する", async () => {
         // arange
 
         // act
-        await gacha.makePokemonStatus()
+        const status = await gacha.makePokemonStatus()
+        const height = status.children[0]
 
         // assert
-        const  height = document.getElementById('height')
+        expect(height.id).toBe('height')
         expect(height.innerHTML).toBe('身長：40cm')
       });
-      // 2-❹
+      
+      // 2-❺
       it("ポケモンの体重を表示する", async () => {
         // arange
 
         // act
-        await gacha.makePokemonStatus()
+        const status = await gacha.makePokemonStatus()
+        const weight = status.children[1]
 
         // assert
-        const  height = document.getElementById('weight')
-        expect(height.innerHTML).toBe('体重：6.0kg')
+        expect(weight.id).toBe('weight')
+        expect(weight.innerHTML).toBe('体重：6kg')
       });
     });
   });
