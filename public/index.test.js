@@ -271,7 +271,7 @@ describe("ポケモンガチャ全体のテスト", () => {
         // assert
         const pokemonWindow = document.getElementById('pokemonWindow')
         const result = document.getElementById('hogePokemonStatus')
-        expect(pokemonWindow.childElementCount).toBe(3);
+        expect(pokemonWindow.childElementCount).toBe(2);
         expect(pokemonWindow.children[1]).toBe(result);
       });
     });
