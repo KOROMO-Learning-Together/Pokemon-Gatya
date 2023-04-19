@@ -12,13 +12,13 @@ export class PokemonGacha {
         // 1-❶
         await this.randomSelectPokemon()
         // 3-❺
-        // this.randomSelectMonsterBall()
+        this.randomSelectMonsterBall()
         // 1-❻
         const mainContainer = document.getElementById('mainContainer');
         mainContainer.remove()
         // 1-❼ → 3-❶
-        await this.showPokemon()
-        // await this.gachaAction()
+        // await this.showPokemon()
+        await this.gachaAction()
     }
 
     // ボタンにカーソルが乗ったときに実行されるメソッド
@@ -78,7 +78,7 @@ export class PokemonGacha {
 
         // コンティニューボタンを作成
         // 3-❷
-        // const continueButton = this.makeContinueButton()
+        const continueButton = this.makeContinueButton()
 
         // 画面を作成
         // 1-❾
@@ -89,7 +89,7 @@ export class PokemonGacha {
         pokemonWindow.appendChild(pokemonStatus); 
         // コンティニューボタンを表示
         // 3-❸
-        // pokemonWindow.appendChild(continueButton); 
+        pokemonWindow.appendChild(continueButton); 
 
         const pageElement = document.getElementById("page")
         pageElement.appendChild(pokemonWindow);
@@ -396,26 +396,26 @@ export class PokemonGacha {
         if(this.mode === 'easy'){
             const probability = Math.floor(Math.random()*100)
             // 3-❼
-            // if(probability>90){
-            //     this.monsterBall = 'masterBall'
-            // } else if (probability>70){
-            //     this.monsterBall = 'hyperBall'
-            // } else if (probability>40){
-            //     this.monsterBall = 'superBall'
-            // } else {
-            //     this.monsterBall = 'normalBall'
-            // }
+            if(probability>90){
+                this.monsterBall = 'masterBall'
+            } else if (probability>70){
+                this.monsterBall = 'hyperBall'
+            } else if (probability>40){
+                this.monsterBall = 'superBall'
+            } else {
+                this.monsterBall = 'normalBall'
+            }
         }
     }
     // コンティニューボタンを作るメソッド
     makeContinueButton(){
         // コンティニューボタンのエレメントを作成
         // 3-❹
-        // const continueButton = document.createElement('button');
-        // continueButton.id = 'continueButton'
+        const continueButton = document.createElement('button');
+        continueButton.id = 'continueButton'
         // クリック時の動作を設定
         // 3-❺
-        // continueButton.onclick = ()=>{this.continue(this)}
+        continueButton.onclick = ()=>{this.continue(this)}
         // ボタンに挿入するイメージの作成
         const buttonImg = document.createElement('img');
         buttonImg.id = 'continueButtonImg'

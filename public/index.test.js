@@ -1,4 +1,4 @@
-import fs from "fs";``
+import fs from "fs";
 import {PokemonGacha} from './PokemonGacha.js';
 import { JSDOM } from "jsdom";
 import { jest } from '@jest/globals';
@@ -20,7 +20,6 @@ describe("ポケモンガチャ全体のテスト", () => {
     originalFetch = Object.create(global.fetch);
   });
 
-  beforeEach(async () => {
   beforeEach(async () => {
     //index.htmlをテキストとして読み込む
     const indexHtmlText = fs.readFileSync("./public/index.html", {
@@ -46,8 +45,6 @@ describe("ポケモンガチャ全体のテスト", () => {
     const buttonImg = document.getElementById('gachaButtonImg');
     buttonImg.addEventListener('mouseover',()=>{gacha.mouseover()})
     buttonImg.addEventListener('mouseout',()=>{gacha.mouseout()})
-
-
   });
 
   afterEach(()=>{
@@ -128,7 +125,6 @@ describe("ポケモンガチャ全体のテスト", () => {
     });
   });
   // day1 ここからやっていきます。
-  // day1 ここからやっていきます。
   describe("PokemonGacha.jsについてのテスト", () => {
     describe("startメソッドを実行すると", () => {
       beforeEach(()=>{
@@ -164,15 +160,15 @@ describe("ポケモンガチャ全体のテスト", () => {
         expect(mainContainer.remove).toHaveBeenCalled()
       });
       // 3-❻
-        it("randomSelectMonsterBallを呼び出す", async () => {
-          // arange
-  
-          // act
-          await gacha.start()
-  
-          // assert
-          expect(gacha.randomSelectMonsterBall).toHaveBeenCalled()
-        });
+      it("randomSelectMonsterBallを呼び出す", async () => {
+        // arange
+
+        // act
+        await gacha.start()
+
+        // assert
+        expect(gacha.randomSelectMonsterBall).toHaveBeenCalled()
+      });
       // 1-❼ ⇨ 3-❶
       // it("showPokemonを呼び出す", async () => {
       it("gachaActionを呼び出す", async () => {
@@ -232,7 +228,6 @@ describe("ポケモンガチャ全体のテスト", () => {
     });
     describe("showPokemonメソッドを実行すると", () => {
       beforeEach(()=>{
-      beforeEach(()=>{
         // ポケモンの画像を取得するためのメソッド
         // 今回はこれを使っていればOK
         const hogePokemonImg = document.createElement('div')
@@ -270,9 +265,9 @@ describe("ポケモンガチャ全体のテスト", () => {
         const result = document.getElementById('hogePokemonImg')
         expect(page.childElementCount).toBe(1);
         expect(page.firstElementChild).toBe(pokemonWindow);
-        expect(pokemonWindow.childElementCount).toBe(2);
+        // expect(pokemonWindow.childElementCount).toBe(2);
         // コンティニューボタンを実装したらテストを書き換える
-        // expect(pokemonWindow.childElementCount).toBe(3);
+        expect(pokemonWindow.childElementCount).toBe(3);
         expect(pokemonWindow.firstElementChild).toBe(result);
       });
 
@@ -296,9 +291,9 @@ describe("ポケモンガチャ全体のテスト", () => {
         // assert
         const pokemonWindow = document.getElementById('pokemonWindow')
         const result = document.getElementById('hogePokemonStatus')
-        expect(pokemonWindow.childElementCount).toBe(2);
+        // expect(pokemonWindow.childElementCount).toBe(2);
         // コンティニューボタンを実装したらテストを書き換える
-        // expect(pokemonWindow.childElementCount).toBe(3);
+        expect(pokemonWindow.childElementCount).toBe(3);
         expect(pokemonWindow.children[1]).toBe(result);
       });
       // 3-❷
@@ -327,7 +322,6 @@ describe("ポケモンガチャ全体のテスト", () => {
       });
     });
     describe("makePokemonStatusメソッドを実行すると", () => {
-
       beforeEach(async ()=>{
         // ピカチュウのデータをpokemonに格納しておく
         gacha.pokemon = pikachu
@@ -337,7 +331,6 @@ describe("ポケモンガチャ全体のテスト", () => {
           .mockResolvedValueOnce({json:jest.fn().mockResolvedValue(pikacuAbility1)})
           .mockResolvedValueOnce({json:jest.fn().mockResolvedValue(pikacuAbility2)})
       })
-      
       // 2-❸
       it("ポケモンのステータスを表示する場所を作成する(空のdiv)", async () => {
         // arange
@@ -348,7 +341,6 @@ describe("ポケモンガチャ全体のテスト", () => {
         // assert
         expect(statusWindow.id).toBe('statusWindow')
       });
-
       // 2-❹
       it("ポケモンの身長を表示する", async () => {
         // arange
@@ -362,7 +354,6 @@ describe("ポケモンガチャ全体のテスト", () => {
         expect(height.id).toBe('height')
         expect(height.innerHTML).toBe('身長：40 cm')
       });
-      
       // 2-❺
       it("ポケモンの体重を表示する", async () => {
         // arange
@@ -376,13 +367,7 @@ describe("ポケモンガチャ全体のテスト", () => {
         expect(weight.innerHTML).toBe('体重：6 kg')
       });
     });
-
     describe("makeContinueButtonメソッドを実行すると", () => {
-
-      beforeEach(async ()=>{
-        
-      })
-      
       // 3-❹
       it("コンティニューボタンが作成される", async () => {
         // arange
@@ -394,7 +379,6 @@ describe("ポケモンガチャ全体のテスト", () => {
         expect(continueButton.childElementCount).toBe(1)
         expect(continueButton.firstElementChild.id).toBe('continueButton')
       });
-
       // 3-❺
       it("コンティニューボタンを押すとcontinueメソッドが実行される", async () => {
         // arange
@@ -403,7 +387,7 @@ describe("ポケモンガチャ全体のテスト", () => {
         const continueButton = await gacha.makeContinueButton()
 
         // assert
-        
+
       });
     });
     describe("randomSelectMonsterBallメソッドを実行すると", () => {
