@@ -1,41 +1,44 @@
 export class PokemonGacha {
     constructor(mode){
-        mode = mode;
+        this.mode = mode;
     }
 
     pokemon = {}
     species = {}
     monsterBall = 'normalBall'
 
+    // ボタンがクリックされたときに実行されるメソッド
     async start(){
-        // 表示している要素を消す
+        // 1-❶
+        await this.randomSelectPokemon()
+        // 3-❺
+        // this.randomSelectMonsterBall()
+        // 1-❻
         const mainContainer = document.getElementById('mainContainer');
         mainContainer.remove()
-
-        // 使用するモンスターボールを決める
-        this.randomSelectMonsterBall()
-
-        // ゲットするポケモンを決める
-        await this.randomSelectPokemon()
-
-        // ガチャのアクションを再生
-        this.gachaAction()
+        // 1-❼ → 3-❶
+        await this.showPokemon()
+        // await this.gachaAction()
     }
 
+    // ボタンにカーソルが乗ったときに実行されるメソッド
     mouseover(){
         const buttonImg = document.getElementById('gachaButtonImg');
         buttonImg.src = 'gachaButtonHover.png'
     }
 
+    // ボタンからカーソルが外れたときに実行されるメソッド
     mouseout(){
         const buttonImg = document.getElementById('gachaButtonImg');
         buttonImg.src = 'gachaButton.png'
     }
 
+    // ガチャアクションの動画をAuto再生するメソッド
     gachaAction(){
-        // ガチャアクションの動画をオート再生
+        // video要素を作成
         const video = document.createElement('video');
         video.id = 'gacha';
+        // 使用するモンスターボールで使う動画を切り替える
         if(this.monsterBall === 'superBall'){
             video.src = './gachaActionSuper.mov';
         } else if(this.monsterBall === 'hyperBall'){
@@ -45,10 +48,11 @@ export class PokemonGacha {
         } else {
             video.src = './gachaAction.mov';
         }
+        // Auto再生の設定
         video.autoplay = true;
         video.muted = true;
         video.playsinline = true;
-
+        // 作成したvideo要素をpage要素に追加
         const pageElement = document.getElementById("page")
         pageElement.appendChild(video);
 
@@ -62,43 +66,36 @@ export class PokemonGacha {
         }, false);
     }
 
+    // ゲットしたポケモンを表示するメソッド
     async showPokemon(){
         // ポケモンの画像を取得
+        // 1-❽
         const pokemonImg = await this.makePokemonImg()
 
         // ポケモンのステータス表示を作成
+        // 2-❶
         const pokemonStatus = await this.makePokemonStatus()
 
+        // コンティニューボタンを作成
+        // 3-❷
+        // const continueButton = this.makeContinueButton()
+
         // 画面を作成
+        // 1-❾
         const pokemonWindow = document.createElement('div');
         pokemonWindow.id = 'pokemonWindow'
         pokemonWindow.appendChild(pokemonImg);
-        pokemonWindow.appendChild(pokemonStatus);
-
-        // コンティニューボタンを作成
-        const continueButton = document.createElement('button');
-        continueButton.id = 'continueButton'
-        continueButton.onclick = ()=>{this.continue(this)}
-        const buttonImg = document.createElement('img');
-        buttonImg.id = 'continueButtonImg'
-        buttonImg.src = 'continueButton.svg'
-        buttonImg.onmouseenter = ()=>{buttonImg.src = 'continueButtonHover.svg'}
-        buttonImg.onmouseout = ()=>{buttonImg.src = 'continueButton.svg'}
-        continueButton.appendChild(buttonImg)
-
-        const footer = document.createElement('div')
-        footer.id = 'footer'
-        footer.appendChild(continueButton)
-
-        pokemonWindow.appendChild(footer);
-
-
+        // 2-❷
+        pokemonWindow.appendChild(pokemonStatus); 
+        // コンティニューボタンを表示
+        // 3-❸
+        // pokemonWindow.appendChild(continueButton); 
 
         const pageElement = document.getElementById("page")
         pageElement.appendChild(pokemonWindow);
 
     }
-    // ポケモンの画像を取得するためのメソッド
+    // ポケモンの画像を取得した情報から作成するためのメソッド
     async makePokemonImg(){
         // ポケモンの画像を取得する
         // ランダムに取得したポケモンのデータから必要な画像のURLを抽出して画像データを取得する
@@ -159,10 +156,11 @@ export class PokemonGacha {
         const statusL = document.createElement('div');
         statusL.id =  'statusL'
 
+        //　2-❹
         const height = document.createElement('p');
         height.id = 'height'
         height.innerHTML = `身長：${this.pokemon.height*10} cm`
-
+        //　2-❺
         const weight = document.createElement('p');
         weight.id = 'weight'
         weight.innerHTML = `体重：${this.pokemon.weight/10} kg`
@@ -373,15 +371,15 @@ export class PokemonGacha {
 
         description.appendChild(flavorText)
 
+        //　2-❸
         const statusWindow = document.createElement('div');
         statusWindow.id =  'statusWindow'
 
         statusWindow.appendChild(status)
         statusWindow.appendChild(description)
 
-
+        //　2-❸
         return statusWindow
-
     }
 
     async randomSelectPokemon(){
@@ -396,20 +394,44 @@ export class PokemonGacha {
     randomSelectMonsterBall(){
         // 設定によって出現するモンスターボールの確率を変更
         if(this.mode === 'easy'){
-            const hogehoge = Math.floor(Math.random()*100)
-            if(hogehoge>90){
-                this.monsterBall = 'masterBall'
-            } else if (hogehoge>70){
-                this.monsterBall = 'hyperBall'
-            } else if (hogehoge>40){
-                this.monsterBall = 'superBall'
-            } else {
-                this.monsterBall = 'normalBall'
-            }
+            const probability = Math.floor(Math.random()*100)
+            // 3-❼
+            // if(probability>90){
+            //     this.monsterBall = 'masterBall'
+            // } else if (probability>70){
+            //     this.monsterBall = 'hyperBall'
+            // } else if (probability>40){
+            //     this.monsterBall = 'superBall'
+            // } else {
+            //     this.monsterBall = 'normalBall'
+            // }
         }
     }
+    // コンティニューボタンを作るメソッド
+    makeContinueButton(){
+        // コンティニューボタンのエレメントを作成
+        // 3-❹
+        // const continueButton = document.createElement('button');
+        // continueButton.id = 'continueButton'
+        // クリック時の動作を設定
+        // 3-❺
+        // continueButton.onclick = ()=>{this.continue(this)}
+        // ボタンに挿入するイメージの作成
+        const buttonImg = document.createElement('img');
+        buttonImg.id = 'continueButtonImg'
+        buttonImg.src = 'continueButton.svg'
+        // ボタンホバー時の動作を設定
+        buttonImg.onmouseenter = ()=>{buttonImg.src = 'continueButtonHover.svg'}
+        buttonImg.onmouseout = ()=>{buttonImg.src = 'continueButton.svg'}
+        continueButton.appendChild(buttonImg)
+        // ボタンを配置するエリアを作成
+        const footer = document.createElement('div')
+        footer.id = 'footer'
+        // 作成したボタンを追加
+        footer.appendChild(continueButton)
+        return footer
+    }
 
-    
     continue(gacha){
         // getしたポケモンを消す
         const pokemonWindow = document.getElementById('pokemonWindow')
