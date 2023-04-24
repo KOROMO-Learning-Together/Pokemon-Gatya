@@ -11,7 +11,7 @@ export class PokemonGacha {
     async start(){
         // 1-❶
         await this.randomSelectPokemon()
-        // 3-❺
+        // 3-❻
         // this.randomSelectMonsterBall()
         // 1-❻
         const mainContainer = document.getElementById('mainContainer');
