@@ -382,11 +382,15 @@ describe("ポケモンガチャ全体のテスト", () => {
       // 3-❺
       it("コンティニューボタンを押すとcontinueメソッドが実行される", async () => {
         // arange
+        gacha.continue = jest.fn()
 
         // act
         const continueButton = await gacha.makeContinueButton()
+        const click = new jsdom.MouseEvent('click')
+        continueButton.firstElementChild.dispatchEvent(click)
 
         // assert
+        expect(gacha.continue).toHaveBeenCalledWith(gacha)
 
       });
     });
